@@ -1,4 +1,4 @@
-package com.reptile.model.dto;
+package com.reptile.search;
 
 import lombok.Data;
 

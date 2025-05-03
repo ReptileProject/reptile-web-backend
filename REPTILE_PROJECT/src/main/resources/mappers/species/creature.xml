@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.reptile.species.model.dao.CreatureDao">
+
+	<select id="searchCreatureDetail">
+		select * from creature where creature_id = #{creatureId}
+	</select>
+	
+	<select id="search" resultMap="creatureMap">
+		select * from creature
+		<trim prefix="where" prefixOverrides="and">
+			<if test="icunGroupId != null"> AND icun_id = #{icunGroupId}</if>
+			<if test="regionId != null"> AND region_id = #{regionId}</if>
+			<if test="speciesGroupId != null"> AND group_id = #{speciesGroupId}</if>
+			<if test="keyWord != null"> AND creature_name like concat('%', #{keyWord},'%')</if>
+		</trim>
+	</select>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="creature_id">
+		insert into creature(creature_name, descript, icun_id, region_id, group_id)
+		values(#{creature_name}, #{descript}, #{icun_id}, #{region_id}, #{group_id})
+	</insert>
+	
+	<update id="update">
+		update creature
+		set(#{creature_name}, #{descript}, #{icun_id}, #{region_id}, #{group_id})
+		where creature_id = #{creatureId}
+	</update>
+	
+	<delete id="delete">
+		delete from creature
+		where creature_id = #{creatureId}
+	</delete>
+	
+	<resultMap type="Creature" id="creatureMap">
+		<id column="creature_id" property="creatureId"/>
+		<result column="creature_name" property="creatureName"/>
+		<result column="descript" property="descript"/>
+		<result column="icun_id" property="icunId"/>
+		<result column="region_id" property="regionId"/>
+		<result column="group_id" property="groupId"/>
+	</resultMap>
+</mapper>

@@ -1,4 +1,4 @@
-package com.reptile.model.dto;
+package com.reptile.species.model.dto;
 
 import lombok.Data;
 import lombok.Builder;
