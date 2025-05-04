@@ -10,6 +10,7 @@ import com.reptile.species.model.dto.Creature;
 @Mapper
 public interface CreatureDao {
 	public Creature searchCreatureDetail(int creatureId);
+	public int searchTotalCount(SpeciesSearchCondition condition);
 	public List<Creature> search(SpeciesSearchCondition condition);
 	
 	public int insert(Creature creature);

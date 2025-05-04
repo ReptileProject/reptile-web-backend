@@ -12,7 +12,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 public class SwaggerConfig {
 	@Bean
 	GroupedOpenApi speciesOpenApi() {
-		String[] paths = {"reptile/species/**"};
+		String[] paths = {"/reptile/species/**"};
 		return GroupedOpenApi.builder().group("SPECIES API").pathsToMatch(paths).build();
 	}
 }

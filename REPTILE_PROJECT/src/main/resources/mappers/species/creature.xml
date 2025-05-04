@@ -8,6 +8,16 @@
 		select * from creature where creature_id = #{creatureId}
 	</select>
 	
+	<select id="searchTotalCount" resultMap="creatureMap">
+		select count(*) from creature
+		<trim prefix="where" prefixOverrides="and">
+			<if test="icunGroupId != null"> AND icun_id = #{icunGroupId}</if>
+			<if test="regionId != null"> AND region_id = #{regionId}</if>
+			<if test="speciesGroupId != null"> AND group_id = #{speciesGroupId}</if>
+			<if test="keyWord != null"> AND creature_name like concat('%', #{keyWord},'%')</if>
+		</trim>
+	</select>
+	
 	<select id="search" resultMap="creatureMap">
 		select * from creature
 		<trim prefix="where" prefixOverrides="and">
@@ -34,7 +44,7 @@
 		where creature_id = #{creatureId}
 	</delete>
 	
-	<resultMap type="Creature" id="creatureMap">
+	<resultMap type="com.reptile.species.model.dto.Creature" id="creatureMap">
 		<id column="creature_id" property="creatureId"/>
 		<result column="creature_name" property="creatureName"/>
 		<result column="descript" property="descript"/>
