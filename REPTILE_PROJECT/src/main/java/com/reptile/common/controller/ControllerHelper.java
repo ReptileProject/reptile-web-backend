@@ -1,4 +1,4 @@
-package com.reptile.controller;
+package com.reptile.common.controller;
 
 import java.util.Map;
 
