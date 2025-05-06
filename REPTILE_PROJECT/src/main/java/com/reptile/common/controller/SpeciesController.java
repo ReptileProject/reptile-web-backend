@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,12 +28,8 @@ public class SpeciesController implements ControllerHelper{
 		
 	@GetMapping("/{creatureId}")
 	@Operation(summary="search creature list with search condition")
-	@ApiResponses({@ApiResponse(responseCode="200", description="success to return list", content=@io.swagger.v3.oas.annotations.media.Content(
-            mediaType="application/json",
-            schema=@io.swagger.v3.oas.annotations.media.Schema(implementation=Creature.class)
-        )), 
-				   @ApiResponse(responseCode="500", description="fail to return list")}
-			)
+	@ApiResponses({@ApiResponse(responseCode="200", description="success to return list"), 
+				   @ApiResponse(responseCode="500", description="fail to return list")})
 	public ResponseEntity<?> searchCreatureDetail(@PathVariable int creatureId) {
 		try {
 			Creature creature = cService.searchCreatureDetail(creatureId);
@@ -44,17 +41,27 @@ public class SpeciesController implements ControllerHelper{
 	
 	@GetMapping
 	@Operation(summary="search creature detail")
-	@ApiResponses({@ApiResponse(responseCode="200", description="success to return detail", content=@io.swagger.v3.oas.annotations.media.Content(
-            mediaType="application/json",
-            schema=@io.swagger.v3.oas.annotations.media.Schema(implementation=Creature.class)
-        )), 
-				   @ApiResponse(responseCode="500", description="fail to return detail")}
-			)
+	@ApiResponses({@ApiResponse(responseCode="200", description="success to return detail"), 
+				   @ApiResponse(responseCode="500", description="fail to return detail")})
 	public ResponseEntity<?> searchCreatures(@ModelAttribute SpeciesSearchCondition condition){
 		try {
 			Page<Creature> page = cService.searchCreatures(condition);
 			
 			return handleSuccess(Map.of("creaturePage", page, "currentPage", page.getCondition().getCurrentPage(),"totalPage", page.getTotalPages()));
+		}catch(Exception e) {
+			return handleFail(e);
+		}
+	}
+	
+	@PostMapping
+	@Operation(summary="update creature detail")
+	@ApiResponses({@ApiResponse(responseCode="200", description="success to update detail"), 
+		   		   @ApiResponse(responseCode="500", description="fail to update detail")})
+	public ResponseEntity<?> updateCreatureDetail(@ModelAttribute Creature creature){
+		try {
+			int result = cService.updateCreature(creature);
+			
+			return handleSuccess(Map.of("result", result, "creature", creature));
 		}catch(Exception e) {
 			return handleFail(e);
 		}

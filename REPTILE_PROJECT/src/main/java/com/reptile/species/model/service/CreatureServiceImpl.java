@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @Primary
 @Service
 @RequiredArgsConstructor
-public class CreatureServiceImpl implements  CreatureService{
+public class CreatureServiceImpl implements CreatureService{
 	private final CreatureDao cDao;
 	
 	@Override
