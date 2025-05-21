@@ -24,4 +24,6 @@ public class Creature {
 	private int regionId;
 	@Schema(description="id for creature's kind", requiredMode=RequiredMode.REQUIRED)
 	private int groupId;
+	
+	private TaxonomyGroup taxonomyGroup;
 }

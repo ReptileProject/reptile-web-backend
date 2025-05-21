@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import com.reptile.search.Page;
 import com.reptile.search.SpeciesSearchCondition;
 import com.reptile.species.model.dao.CreatureDao;
+import com.reptile.species.model.dao.TaxonomyDao;
 import com.reptile.species.model.dto.Creature;
+import com.reptile.species.model.dto.TaxonomyGroup;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CreatureServiceImpl implements CreatureService{
 	private final CreatureDao cDao;
-	
+	private final TaxonomyDao tDao;
 	@Override
 	public Page<Creature> searchCreatures(SpeciesSearchCondition condition) {
 		int total = cDao.searchTotalCount(condition);
