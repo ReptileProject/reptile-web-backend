@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TaxnomyGroup {
+public class TaxonomyGroup {
 	@Schema(description="tanomy group Id", requiredMode=RequiredMode.REQUIRED)
 	private int taxnomyId;
 	@Schema(description="order Group Id", requiredMode=RequiredMode.NOT_REQUIRED)
