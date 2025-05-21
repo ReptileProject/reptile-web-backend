@@ -19,7 +19,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CreatureServiceImpl implements CreatureService{
 	private final CreatureDao cDao;
-	private final TaxonomyDao tDao;
 	@Override
 	public Page<Creature> searchCreatures(SpeciesSearchCondition condition) {
 		int total = cDao.searchTotalCount(condition);
