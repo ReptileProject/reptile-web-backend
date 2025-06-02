@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.reptile.species.model.dao.TaxonomyDao">
+
+    <!-- 1. 하위 그룹 검색 -->
+    <select id="searchChildGroups" resultType="com.reptile.species.model.dto.SpeciesGroup">
+        SELECT * 
+        FROM 
+        <choose>
+            <when test="table.name() == 'SPECIES'">Species_Group</when>
+            <when test="table.name() == 'GENUS'">Genus_Group</when>
+            <when test="table.name() == 'TRIBE'">Tribe_Group</when>
+            <when test="table.name() == 'FAMILY'">Family_Group</when>
+            <when test="table.name() == 'ORDER'">Order_Group</when>
+        </choose>
+        WHERE parent_group_id = #{parentGroupId}
+    </select>
+
+    <!-- 2. 단일 그룹 상세 조회 -->
+    <select id="searchGroupDetail" resultType="com.reptile.species.model.dto.SpeciesGroup">
+        SELECT * 
+        FROM 
+        <choose>
+            <when test="table.name() == 'SPECIES'">Species_Group</when>
+            <when test="table.name() == 'GENUS'">Genus_Group</when>
+            <when test="table.name() == 'TRIBE'">Tribe_Group</when>
+            <when test="table.name() == 'FAMILY'">Family_Group</when>
+            <when test="table.name() == 'ORDER'">Order_Group</when>
+        </choose>
+        WHERE ${table.name().toLowerCase()}_group_id = #{groupId}
+    </select>
+
+    <!-- 3. Taxonomy 조회 (예: 생물의 전체 분류 계층 조회) 수정 필요-->
+    <select id="searchCreatureTaxnomy" resultType="com.reptile.species.model.dto.TaxonomyGroup">
+        SELECT * FROM Taxonomy_Group WHERE taxonomy_id = #{creatureId}
+    </select>
+
+    <!-- 4. 그룹 추가 -->
+    <insert id="insertGroup">
+        INSERT INTO 
+        <choose>
+            <when test="table.name() == 'SPECIES'">Species_Group</when>
+            <when test="table.name() == 'GENUS'">Genus_Group</when>
+            <when test="table.name() == 'TRIBE'">Tribe_Group</when>
+            <when test="table.name() == 'FAMILY'">Family_Group</when>
+            <when test="table.name() == 'ORDER'">Order_Group</when>
+        </choose>
+        (name, parent_group_id)
+        VALUES (#{group.name}, #{group.parentGroupId})
+    </insert>
+
+    <!-- 5. Taxonomy 추가 -->
+    <insert id="insertTaxnomy">
+        INSERT INTO Taxonomy_Group (
+            species_group_id, genus_group_id, tribe_group_id, family_group_id, order_group_id
+        ) VALUES (
+            #{speciesGroupId}, #{genusGroupId}, #{tribeGroupId}, #{familyGroupId}, #{orderGroupId}
+        )
+    </insert>
+
+    <!-- 6. 그룹 삭제 -->
+    <delete id="deleteGroup">
+        DELETE FROM 
+        <choose>
+            <when test="table.name() == 'SPECIES'">Species_Group</when>
+            <when test="table.name() == 'GENUS'">Genus_Group</when>
+            <when test="table.name() == 'TRIBE'">Tribe_Group</when>
+            <when test="table.name() == 'FAMILY'">Family_Group</when>
+            <when test="table.name() == 'ORDER'">Order_Group</when>
+        </choose>
+        WHERE ${table.name().toLowerCase()}_group_id = #{groupId}
+    </delete>
+
+    <!-- 7. Taxonomy 삭제 -->
+    <delete id="deleteTaxnomy">
+        DELETE FROM Taxonomy_Group WHERE taxonomy_id = #{taxnomyId}
+    </delete>
+
+    <!-- 8. 그룹 수정 -->
+    <update id="updateGroup">
+        UPDATE 
+        <choose>
+            <when test="table.name() == 'SPECIES'">Species_Group</when>
+            <when test="table.name() == 'GENUS'">Genus_Group</when>
+            <when test="table.name() == 'TRIBE'">Tribe_Group</when>
+            <when test="table.name() == 'FAMILY'">Family_Group</when>
+            <when test="table.name() == 'ORDER'">Order_Group</when>
+        </choose>
+        SET name = #{group.name}, parent_group_id = #{group.parentGroupId}
+        WHERE ${table.name().toLowerCase()}_group_id = #{group.groupId}
+    </update>
+
+    <!-- 9. Taxonomy 수정 -->
+    <update id="updateTaxnomy">
+        UPDATE Taxonomy_Group
+        SET species_group_id = #{speciesGroupId},
+            genus_group_id = #{genusGroupId},
+            tribe_group_id = #{tribeGroupId},
+            family_group_id = #{familyGroupId},
+            order_group_id = #{orderGroupId}
+        WHERE taxonomy_id = #{taxonomyId}
+    </update>
+
+</mapper>
