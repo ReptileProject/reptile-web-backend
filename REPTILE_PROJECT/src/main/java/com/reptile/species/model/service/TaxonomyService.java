@@ -7,7 +7,7 @@ import com.reptile.species.model.dto.TaxonomyGroup;
 import com.reptile.species.model.dto.TaxonomyTable;
 
 public interface TaxonomyService {
-	public List<SpeciesGroup> searchChildGroups(TaxonomyTable table, int parentGroupId);
+	public List<SpeciesGroup> searchChildGroups(TaxonomyTable table, Integer parentGroupId);
 	public SpeciesGroup searchGroupDetail(TaxonomyTable table, int groupId);
 	public TaxonomyGroup searchCreatureTaxnomy(int creatureTaxonomyId);
 	

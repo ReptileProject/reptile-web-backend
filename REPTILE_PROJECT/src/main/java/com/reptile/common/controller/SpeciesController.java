@@ -31,7 +31,7 @@ public class SpeciesController implements ControllerHelper{
 	private final TaxonomyService tService;
 	
 	@GetMapping("/{creatureId}")
-	@Operation(summary="search creature list with search condition")
+	@Operation(summary="search creature detail")
 	@ApiResponses({@ApiResponse(responseCode="200", description="success to return list"), 
 				   @ApiResponse(responseCode="500", description="fail to return list")})
 	public ResponseEntity<?> searchCreatureDetail(@PathVariable int creatureId) {
@@ -45,7 +45,7 @@ public class SpeciesController implements ControllerHelper{
 	}
 	
 	@GetMapping
-	@Operation(summary="search creature detail")
+	@Operation(summary="search list with search condition")
 	@ApiResponses({@ApiResponse(responseCode="200", description="success to return detail"), 
 				   @ApiResponse(responseCode="500", description="fail to return detail")})
 	public ResponseEntity<?> searchCreatures(@ModelAttribute SpeciesSearchCondition condition){

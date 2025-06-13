@@ -33,11 +33,12 @@ public class TaxonomyController implements ControllerHelper {
     @GetMapping("/{table}/children")
     public ResponseEntity<?> searchChildGroups(
             @PathVariable("table") TaxonomyTable table,
-            @RequestParam("parentId") int parentGroupId) {
+            @RequestParam(name="parentId", required=false) Integer parentGroupId) {
         try {
             List<SpeciesGroup> result = taxonomyService.searchChildGroups(table, parentGroupId);
             return handleSuccess(result);
         } catch (Exception e) {
+        	e.printStackTrace();
             return handleFail(e);
         }
     }
@@ -46,11 +47,12 @@ public class TaxonomyController implements ControllerHelper {
     @GetMapping("/{table}/detail/{groupId}")
     public ResponseEntity<?> searchGroupDetail(
             @PathVariable("table") TaxonomyTable table,
-            @PathVariable("groupId") int groupId) {
+            @PathVariable("groupId") Integer groupId) {
         try {
             SpeciesGroup result = taxonomyService.searchGroupDetail(table, groupId);
             return handleSuccess(result);
         } catch (Exception e) {
+        	e.printStackTrace();
             return handleFail(e);
         }
     }
@@ -62,6 +64,7 @@ public class TaxonomyController implements ControllerHelper {
             TaxonomyGroup result = taxonomyService.searchCreatureTaxnomy(taxonomyId);
             return handleSuccess(result);
         } catch (Exception e) {
+        	e.printStackTrace();
             return handleFail(e);
         }
     }
@@ -75,6 +78,7 @@ public class TaxonomyController implements ControllerHelper {
             int result = taxonomyService.insertGroup(table, group);
             return handleSuccess(result);
         } catch (Exception e) {
+        	e.printStackTrace();
             return handleFail(e);
         }
     }
@@ -86,6 +90,7 @@ public class TaxonomyController implements ControllerHelper {
             int result = taxonomyService.insertTaxnomy(taxonomyGroup);
             return handleSuccess(result);
         } catch (Exception e) {
+        	e.printStackTrace();
             return handleFail(e);
         }
     }
@@ -99,6 +104,7 @@ public class TaxonomyController implements ControllerHelper {
             int result = taxonomyService.deleteGroup(table, groupId);
             return handleSuccess(result);
         } catch (Exception e) {
+        	e.printStackTrace();
             return handleFail(e);
         }
     }

@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class TaxonomyServiceImpl implements TaxonomyService{
 	private final TaxonomyDao tDao;
 	@Override
-	public List<SpeciesGroup> searchChildGroups(TaxonomyTable table, int parentGroupId) {
+	public List<SpeciesGroup> searchChildGroups(TaxonomyTable table, Integer parentGroupId) {
 		return tDao.searchChildGroups(table, parentGroupId);
 	}
 
