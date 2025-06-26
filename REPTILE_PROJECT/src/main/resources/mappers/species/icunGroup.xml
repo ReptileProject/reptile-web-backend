@@ -3,15 +3,21 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.reptile.species.model.dao.IcunGroupDao">
 	<!--  1. 단일 그룹 상세 조회 -->
-	<select id="searchIcunGroupDetail" resultType="com.reptile.species.model.IcunGroup">
+	<select id="searchIcunGroupDetail" resultType="com.reptile.species.model.dto.IcunGroup">
 	SELECT *
 	FROM icun_group
 	WHERE #{icunId}
 	</select>
 	
 	<!--  2. 그룹 전체 조회 -->
-	<select id="searchAll" resultType="com.reptile.species.model.IcunGroup">
+	<select id="searchAll" resultMap="icunGroupMap">
 	SELECT *
 	FROM icun_group
 	</select>
+	
+	<resultMap type="com.reptile.species.model.dto.IcunGroup" id="icunGroupMap">
+		<id column="icun_id" property="icunId"/>
+		<result column="level" property="groupLevel"/>
+		<result column="description" property="description"/>
+	</resultMap>
 </mapper>
