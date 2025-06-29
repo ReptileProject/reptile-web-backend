@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("reptile/icun")
+@RequestMapping("species/icun")
 @RequiredArgsConstructor
 public class IcunGroupController implements ControllerHelper{
 	private final IcunGroupService iService;
