@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class IcunGroup {
+public class IucnGroup {
 	@Schema(description="icunGroupId", requiredMode=RequiredMode.REQUIRED)
-	private int icunId;
+	private int iucnId;
 	@Schema(description="icunGroup Level", requiredMode=RequiredMode.REQUIRED)
 	private String groupLevel;
 	@Schema(description="icunGroup Description", requiredMode=RequiredMode.NOT_REQUIRED)

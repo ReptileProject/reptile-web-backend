@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.reptile.common.controller.ControllerHelper;
-import com.reptile.species.model.dto.IcunGroup;
-import com.reptile.species.model.service.IcunGroupService;
+import com.reptile.species.model.dto.IucnGroup;
+import com.reptile.species.model.service.IucnGroupService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -21,30 +21,30 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("species/icun")
 @RequiredArgsConstructor
-public class IcunGroupController implements ControllerHelper{
-	private final IcunGroupService iService;
+public class IucnGroupController implements ControllerHelper{
+	private final IucnGroupService iService;
 	
 	@GetMapping
-	@Operation(summary="search icun group list")
+	@Operation(summary="search iucn group list")
 	@ApiResponses({@ApiResponse(responseCode="200", description="success to return list"),
 				  @ApiResponse(responseCode="500", description="fail to return list")})
-	public ResponseEntity<?> searchIcunGroups(){
+	public ResponseEntity<?> searchIucnGroups(){
 		try {
-			List<IcunGroup> list = iService.searchAll();
-			return handleSuccess(Map.of("icunGroupList", list));
+			List<IucnGroup> list = iService.searchAll();
+			return handleSuccess(Map.of("iucnGroupList", list));
 		}catch(Exception e) {
 			return handleFail(e);
 		}
 	}
 	
-	@GetMapping("/{icunId}")
-	@Operation(summary="search icun group detail")
+	@GetMapping("/{iucnId}")
+	@Operation(summary="search iucn group detail")
 	@ApiResponses({@ApiResponse(responseCode="200", description="success to return detail"),
 				  @ApiResponse(responseCode="500", description="fail to return detail")})
-	public ResponseEntity<?> searchIcunGroupDetail(@PathVariable int icunId){
+	public ResponseEntity<?> searchIucnGroupDetail(@PathVariable int iucnId){
 		try {
-			IcunGroup icun = iService.searchDetail(icunId);
-			return handleSuccess(Map.of("icunGroup", icun));
+			IucnGroup iucn = iService.searchDetail(iucnId);
+			return handleSuccess(Map.of("iucnGroup", iucn));
 		}catch(Exception e) {
 			return handleFail(e);
 		}

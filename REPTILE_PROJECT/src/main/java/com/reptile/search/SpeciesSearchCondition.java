@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @Data
 public class SpeciesSearchCondition extends BaseSearchCondition{
 	private String keyWord;
-	private Integer icunGroupId;
+	private Integer iucnGroupId;
 	private Integer regionId;
 	private Integer speciesGroupId;
 }

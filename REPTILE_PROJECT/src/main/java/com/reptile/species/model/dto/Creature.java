@@ -19,7 +19,7 @@ public class Creature {
 	@Schema(description="creature description", requiredMode=RequiredMode.REQUIRED)
 	private String descript;
 	@Schema(description="creature's icun group", requiredMode=RequiredMode.NOT_REQUIRED)
-	private int icunId;
+	private int iucnId;
 	@Schema(description="id for creature's habitat", requiredMode=RequiredMode.REQUIRED)
 	private int regionId;
 	@Schema(description="id for creature's kind", requiredMode=RequiredMode.REQUIRED)
