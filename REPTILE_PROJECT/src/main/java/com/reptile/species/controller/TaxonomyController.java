@@ -1,4 +1,4 @@
-package com.reptile.common.controller;
+package com.reptile.species.controller;
 
 import java.util.List;
 
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.reptile.common.controller.ControllerHelper;
 import com.reptile.species.model.dto.SpeciesGroup;
 import com.reptile.species.model.dto.TaxonomyGroup;
 import com.reptile.species.model.dto.TaxonomyTable;

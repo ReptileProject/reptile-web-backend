@@ -1,0 +1,23 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.reptile.species.model.dao.IucnGroupDao">
+	<!--  1. 단일 그룹 상세 조회 -->
+	<select id="searchIucnGroupDetail" resultType="com.reptile.species.model.dto.IucnGroup">
+	SELECT *
+	FROM iucn_group
+	WHERE #{icunId}
+	</select>
+	
+	<!--  2. 그룹 전체 조회 -->
+	<select id="searchAll" resultMap="iucnGroupMap">
+	SELECT *
+	FROM iucn_group
+	</select>
+	
+	<resultMap type="com.reptile.species.model.dto.IucnGroup" id="iucnGroupMap">
+		<id column="iucn_id" property="iucnId"/>
+		<result column="level" property="groupLevel"/>
+		<result column="description" property="description"/>
+	</resultMap>
+</mapper>
